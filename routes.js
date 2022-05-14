@@ -18,7 +18,6 @@ router.post("/", async (req, res, next) => {
                 error: true
             })
         }
-        console.log(req.body);
 
         // create a candidate object
         await Candidate.create({
