@@ -20,17 +20,17 @@ router.post("/", async (req, res, next) => {
         }
         console.log(req.body);
 
-        // // create a user object
-        // await Candidate.create({
-        //     candidatesName: req.body.candidatesName,
-        //     email: req.body.email,
-        //     phone: req.body.phone,
-        //     levelOfEducation: req.body.levelOfEducation,
-        //     institution: req.body.institution,
-        //     courseOfStudy: req.body.courseOfStudy,
-        //     stateOfResident: req.body.stateOfResident,
-        //     locationType: req.body.locationType
-        // });
+        // create a candidate object
+        await Candidate.create({
+            candidatesName: req.body.candidatesName,
+            email: req.body.email,
+            phone: req.body.phone,
+            levelOfEducation: req.body.levelOfEducation,
+            institution: req.body.institution,
+            courseOfStudy: req.body.courseOfStudy,
+            stateOfResident: req.body.stateOfResident,
+            locationType: req.body.locationType
+        });
 
         var transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
