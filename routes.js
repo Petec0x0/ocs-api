@@ -30,7 +30,10 @@ router.post("/", async (req, res, next) => {
             institution: req.body.institution,
             courseOfStudy: req.body.courseOfStudy,
             stateOfResident: req.body.stateOfResident,
-            locationType: req.body.locationType
+            locationType: req.body.locationType.toString(),
+            gender: req.body.gender,
+            higherDegreeType: req.body.higherDegreeType,
+            country: req.body.country
         });
 
         var transporter = nodemailer.createTransport({
@@ -50,15 +53,15 @@ router.post("/", async (req, res, next) => {
         var mailOptions = {
             from: `Petec0x0 <${req.body.email}>`,
             to: 'udehonyedikachi01@gmail.com',
-            subject: `OCS : New Candidate Registered`,
+            subject: `Oriental CyberSecurity : New Candidate Registered`,
             html: `
                 ${req.body.candidatesName}<br />
                 ${req.body.email}<br />
                 ${req.body.phone}<br />
                 ${req.body.levelOfEducation}<br />
                 ${req.body.institution}<br />
-                ${req.body.courseOfStudy}<br />
-                ${req.body.stateOfResident}<br />
+                ${req.body.courseOfStudy || " "}<br />
+                ${req.body.stateOfResident || " "}<br />
                 ${req.body.locationType}
             `
         };

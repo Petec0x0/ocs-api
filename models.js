@@ -44,6 +44,15 @@ const candidateSchema = new mongoose.Schema(
         },
         locationType: {
             type: String
+        },
+        gender: {
+            type: String
+        },
+        higherDegreeType: {
+            type: String
+        },
+        country: {
+            type: String
         }
     },
     {
