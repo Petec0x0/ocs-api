@@ -1,5 +1,21 @@
 const mongoose = require('mongoose');
 
+const adminSchema = new mongoose.Schema(
+    {
+        email: {
+            type: String,
+            required: true
+        },
+        password: {
+            type: String,
+            required: true
+        }
+    },
+    {
+        timestamps: true
+    }
+);
+
 const candidateSchema = new mongoose.Schema(
     {
         candidatesName: {
@@ -32,8 +48,9 @@ const candidateSchema = new mongoose.Schema(
     },
     {
         timestamps: true
-    }    
+    }
 );
 
+const Admin = mongoose.model('Admin', adminSchema);
 const Candidate = mongoose.model('Candidate', candidateSchema);
-module.exports = { Candidate };
+module.exports = { Admin, Candidate };

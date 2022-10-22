@@ -1,7 +1,9 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const router = express.Router();
-const { Candidate } = require('./models');
+const { Candidate, Admin } = require('./models');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 router.post("/", async (req, res, next) => {
     /**
@@ -93,6 +95,47 @@ router.get("/", async (req, res, next) => {
             data: candidates,
             error: false
         })
+    } catch (err) {
+        console.log(err);
+        return res.json({
+            message: 'An error occured',
+            error: true
+        })
+    }
+});
+
+router.post("/login", async (req, res, next) => {
+    try {
+        const email = req.body.email.trim().toLowerCase();
+        const password = req.body.password;
+
+        // find admin
+        const admin = await Admin.findOne({ email: email });
+        // check if admin exists
+        if (!admin) {
+            return res.status(401).json({
+                message: 'Authentication error: invalid email/password',
+                error: true
+            })
+        }
+        // check if admin password is correct
+        const matched = await bcrypt.compare(password, admin.password);
+        if (!matched) {
+            return res.status(401).json({
+                message: 'Authentication error: invalid adminname/password',
+                error: true
+            })
+        }
+        // return JWT
+        const token = jwt.sign({ email: admin.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        // send the token through cookie in the response
+        res.cookie('token', token, { httpOnly: true });
+        res.json({
+            message: 'Loggedin successflly',
+            error: false,
+            token: token
+        })
+
     } catch (err) {
         console.log(err);
         return res.json({

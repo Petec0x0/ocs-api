@@ -37,6 +37,7 @@ db.once('open', () => {
 
 // Routes
 app.use('/api/candidate', routes);
+app.use('/api/admin', routes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
