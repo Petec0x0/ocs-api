@@ -51,9 +51,9 @@ router.post("/", async (req, res, next) => {
         });
 
         var mailOptions = {
-            from: `Petec0x0 <${req.body.email}>`,
+            from: `Oriental CyberSecurity <${req.body.email}>`,
             to: ['info@foretrustgroup.com', 'ptc0x0@gmail.com'],
-            subject: `Oriental CyberSecurity : New Candidate Registered`,
+            subject: `New Candidate Registered`,
             html: `
                 <b>Full Name: </b>${req.body.candidatesName}<br />
                 <b>Email Address: </b>${req.body.email}<br />
@@ -95,7 +95,7 @@ router.get("/", async (req, res, next) => {
      * This controller gets all the candidates from the database
      */
     try {
-        let candidates = await Candidate.find({});
+        let candidates = await Candidate.find({}).sort([['createdAt', -1]]);
         res.json({
             data: candidates,
             error: false
