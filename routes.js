@@ -16,7 +16,7 @@ router.post("/", async (req, res, next) => {
         // check if user exists
         if (candidate) {
             return res.json({
-                message: 'Email address already in use',
+                message: 'Email address already in use by another candidate',
                 error: true
             })
         }
@@ -29,7 +29,7 @@ router.post("/", async (req, res, next) => {
             levelOfEducation: req.body.levelOfEducation,
             institution: req.body.institution,
             courseOfStudy: req.body.courseOfStudy,
-            stateOfResident: req.body.stateOfResident,
+            stateOfResident: req.body.stateOfResidence,
             locationType: req.body.locationType.toString(),
             gender: req.body.gender,
             higherDegreeType: req.body.higherDegreeType,
@@ -52,17 +52,19 @@ router.post("/", async (req, res, next) => {
 
         var mailOptions = {
             from: `Petec0x0 <${req.body.email}>`,
-            to: 'udehonyedikachi01@gmail.com',
+            to: ['info@foretrustgroup.com', 'ptc0x0@gmail.com'],
             subject: `Oriental CyberSecurity : New Candidate Registered`,
             html: `
-                ${req.body.candidatesName}<br />
-                ${req.body.email}<br />
-                ${req.body.phone}<br />
-                ${req.body.levelOfEducation}<br />
-                ${req.body.institution}<br />
-                ${req.body.courseOfStudy || " "}<br />
-                ${req.body.stateOfResident || " "}<br />
-                ${req.body.locationType}
+                <b>Full Name: </b>${req.body.candidatesName}<br />
+                <b>Email Address: </b>${req.body.email}<br />
+                <b>Phone Number: </b>${req.body.phone}<br />
+                <b>Level of Education: </b>${req.body.levelOfEducation}<br />
+                <b>Higher Degree Level: </b>${req.body.higherDegreeType || " "}<br />
+                <b>Institution: </b>${req.body.institution || " "}<br />
+                <b>Course of Study: </b>${req.body.courseOfStudy || " "}<br />
+                <b>Country: </b>${req.body.country}<br />
+                <b>State of Residence: </b>${req.body.stateOfResidence || " "}<br />
+                <b>Preferred Method of Attendance: </b>${req.body.locationType}
             `
         };
 
