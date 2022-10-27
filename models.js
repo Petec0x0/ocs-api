@@ -53,6 +53,15 @@ const candidateSchema = new mongoose.Schema(
         },
         country: {
             type: String
+        },
+        paymentMethod: {
+            type: String
+        },
+        payAmount: {
+            type: Number
+        },
+        paymentStatus: {
+            type: String
         }
     },
     {

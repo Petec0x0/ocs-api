@@ -33,7 +33,10 @@ router.post("/", async (req, res, next) => {
             locationType: req.body.locationType.toString(),
             gender: req.body.gender,
             higherDegreeType: req.body.higherDegreeType,
-            country: req.body.country
+            country: req.body.country,
+            paymentMethod: req.body.paymentMethod,
+            paymentStatus: req.body.paymentStatus,
+            payAmount: req.body.payAmount
         });
 
         var transporter = nodemailer.createTransport({
@@ -64,7 +67,10 @@ router.post("/", async (req, res, next) => {
                 <b>Course of Study: </b>${req.body.courseOfStudy || " "}<br />
                 <b>Country: </b>${req.body.country}<br />
                 <b>State of Residence: </b>${req.body.stateOfResidence || " "}<br />
-                <b>Preferred Method of Attendance: </b>${req.body.locationType}
+                <b>Preferred Method of Attendance: </b>${req.body.locationType} <br />
+                <b>Payment Method: </b>${req.body.paymentMethod}<br />
+                <b>Payment Status: </b>${req.body.paymentStatus}<br />
+                <b>Pay Amount: </b>${req.body.payAmount}<br />
             `
         };
 
