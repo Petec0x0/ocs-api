@@ -12,14 +12,14 @@ router.post("/", async (req, res, next) => {
      */
     try {
         // make sure the does not exist already
-        const candidate = await Candidate.findOne({ email: req.body.email });
-        // check if user exists
-        if (candidate) {
-            return res.json({
-                message: 'Email address already in use by another candidate',
-                error: true
-            })
-        }
+        // const candidate = await Candidate.findOne({ email: req.body.email });
+        // // check if user exists
+        // if (candidate) {
+        //     return res.json({
+        //         message: 'Email address already in use by another candidate',
+        //         error: true
+        //     })
+        // }
 
         // create a candidate object
         await Candidate.create({
