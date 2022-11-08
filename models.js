@@ -62,7 +62,11 @@ const candidateSchema = new mongoose.Schema(
         },
         paymentStatus: {
             type: String
-        }
+        },
+        receipt: {
+            url: { type: String },
+            public_id: { type: String }
+        },
     },
     {
         timestamps: true
